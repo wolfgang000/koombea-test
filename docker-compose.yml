@@ -1,0 +1,47 @@
+version: "3.8"
+
+x-env: &env
+  environment:
+    DATABASE_URL: postgres://test_user:test_password@db_dev:5432/postgres_dev
+
+services:
+  backend:
+    <<: *env
+    build:
+      context: .
+      dockerfile: Dockerfile.dev
+    volumes:
+      - ./lib:/home/user/app/lib
+      - ./priv:/home/user/app/priv
+      - ./test:/home/user/app/test
+      - ./assets:/home/user/app/assets
+      - ./config:/home/user/app/config
+      - ./.formatter.exs:/home/user/app/.formatter.exs
+      - ./mix.exs:/home/user/app/mix.exs
+      - ./mix.lock:/home/user/app/mix.lock
+      - elixir_deps:/home/user/app/deps
+      - elixir_build:/home/user/app/_build
+    ports:
+      - 4000:4000
+
+  db_dev:
+    image: "postgres:15.4-alpine3.17"
+    environment:
+      POSTGRES_USER: test_user
+      POSTGRES_PASSWORD: test_password
+      POSTGRES_DB: postgres_dev
+    volumes:
+      - pgdata_dev:/var/lib/postgresql/data:rw
+    ports:
+      - 8004:5432
+    healthcheck:
+      test: ["CMD", "pg_isready", "-U", "test_user", "-d", "postgres_dev"]
+      interval: 30s
+      timeout: 3s
+      retries: 30
+      start_period: 15s
+
+volumes:
+  pgdata_dev:
+  elixir_deps:
+  elixir_build:
