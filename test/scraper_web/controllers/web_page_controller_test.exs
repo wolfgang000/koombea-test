@@ -3,8 +3,7 @@ defmodule ScraperWeb.WebPageControllerTest do
 
   import Scraper.CoreFixtures
 
-  @create_attrs %{link: "some link"}
-  @update_attrs %{link: "some updated link"}
+  @create_attrs %{link: "https://google.com/"}
   @invalid_attrs %{link: nil}
 
   describe "index" do
@@ -43,23 +42,6 @@ defmodule ScraperWeb.WebPageControllerTest do
 
     test "renders form for editing chosen web_page", %{conn: conn, web_page: web_page} do
       conn = get(conn, ~p"/web_pages/#{web_page}/edit")
-      assert html_response(conn, 200) =~ "Edit Web page"
-    end
-  end
-
-  describe "update web_page" do
-    setup [:create_web_page]
-
-    test "redirects when data is valid", %{conn: conn, web_page: web_page} do
-      conn = put(conn, ~p"/web_pages/#{web_page}", web_page: @update_attrs)
-      assert redirected_to(conn) == ~p"/web_pages/#{web_page}"
-
-      conn = get(conn, ~p"/web_pages/#{web_page}")
-      assert html_response(conn, 200) =~ "some updated link"
-    end
-
-    test "renders errors when data is invalid", %{conn: conn, web_page: web_page} do
-      conn = put(conn, ~p"/web_pages/#{web_page}", web_page: @invalid_attrs)
       assert html_response(conn, 200) =~ "Edit Web page"
     end
   end

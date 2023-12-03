@@ -7,6 +7,7 @@ defmodule Scraper.Core do
   alias Scraper.Repo
 
   alias Scraper.Core.WebPage
+  alias Scraper.Core.WebPageLink
 
   @doc """
   Returns the list of web_pages.
@@ -18,7 +19,7 @@ defmodule Scraper.Core do
 
   """
   def list_web_pages do
-    Repo.all(WebPage)
+    Repo.all(from wb in WebPage, preload: [:links])
   end
 
   @doc """
@@ -35,7 +36,7 @@ defmodule Scraper.Core do
       ** (Ecto.NoResultsError)
 
   """
-  def get_web_page!(id), do: Repo.get!(WebPage, id)
+  def get_web_page!(id), do: WebPage |> Repo.get!(id) |> Repo.preload([:links])
 
   @doc """
   Creates a web_page.
@@ -53,6 +54,10 @@ defmodule Scraper.Core do
     %WebPage{}
     |> WebPage.changeset(attrs)
     |> Repo.insert()
+  end
+
+  def create_web_page_links(links) do
+    Repo.insert_all(WebPageLink, links)
   end
 
   @doc """

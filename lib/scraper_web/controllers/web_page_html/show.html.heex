@@ -1,15 +1,10 @@
-<.header>
-  Web page <%= @web_page.id %>
-  <:subtitle>This is a web_page record from your database.</:subtitle>
-  <:actions>
-    <.link href={~p"/web_pages/#{@web_page}/edit"}>
-      <.button>Edit web_page</.button>
-    </.link>
-  </:actions>
-</.header>
-
 <.list>
   <:item title="Link"><%= @web_page.link %></:item>
 </.list>
+
+<.table id="web_pages" rows={@web_page.links} row_click={&JS.navigate(~p"/web_pages/#{&1}")}>
+  <:col :let={web_page_link} label="href"><%= web_page_link.href %></:col>
+  <:col :let={web_page_link} label="body"><%= web_page_link.body %></:col>
+</.table>
 
 <.back navigate={~p"/web_pages"}>Back to web_pages</.back>

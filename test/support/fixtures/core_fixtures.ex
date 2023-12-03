@@ -11,7 +11,7 @@ defmodule Scraper.CoreFixtures do
     {:ok, web_page} =
       attrs
       |> Enum.into(%{
-        link: "some link"
+        link: "https://www.google.com/"
       })
       |> Scraper.Core.create_web_page()
 
