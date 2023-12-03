@@ -53,7 +53,8 @@ defmodule Scraper.MixProject do
       {:dns_cluster, "~> 0.1.1"},
       {:plug_cowboy, "~> 2.5"},
       {:httpoison, "~> 2.0"},
-      {:codepagex, "~> 0.1.6"}
+      {:codepagex, "~> 0.1.6"},
+      {:mock, "~> 0.3.0", only: :test}
     ]
   end
 

@@ -21,7 +21,6 @@ defmodule ScraperWeb.Router do
     pipe_through :browser
 
     get "/", PageController, :home
-    resources "/web_pages", WebPageController
   end
 
   # Other scopes may use custom stacks.
@@ -64,6 +63,7 @@ defmodule ScraperWeb.Router do
   scope "/", ScraperWeb do
     pipe_through [:browser, :require_authenticated_user]
 
+    resources "/web_pages", WebPageController
     get "/users/settings", UserSettingsController, :edit
     put "/users/settings", UserSettingsController, :update
     get "/users/settings/confirm_email/:token", UserSettingsController, :confirm_email

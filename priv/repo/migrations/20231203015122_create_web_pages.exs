@@ -3,6 +3,7 @@ defmodule Scraper.Repo.Migrations.CreateWebPages do
 
   def change do
     create table(:web_pages) do
+      add :user_id, references(:users, on_delete: :delete_all), null: false
       add :link, :string
 
       timestamps(type: :utc_datetime)
