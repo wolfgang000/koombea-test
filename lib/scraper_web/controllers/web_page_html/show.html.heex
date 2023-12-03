@@ -1,5 +1,5 @@
 <.list>
-  <:item title="Link"><%= @web_page.link %></:item>
+  <:item title="Url"><%= @web_page.url %></:item>
 </.list>
 
 <.table id="web_pages" rows={@web_page.links} row_click={&JS.navigate(~p"/web_pages/#{&1}")}>

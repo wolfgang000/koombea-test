@@ -4,8 +4,8 @@ defmodule ScraperWeb.WebPageControllerTest do
 
   import Mock
 
-  @create_attrs %{link: "https://google.com/"}
-  @invalid_attrs %{link: nil}
+  @create_attrs %{url: "https://google.com/"}
+  @invalid_attrs %{url: nil}
 
   setup :register_and_log_in_user
 

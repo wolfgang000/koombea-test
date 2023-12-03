@@ -25,7 +25,7 @@ defmodule Scraper.Core do
       group_by: wb.id,
       select: %{
         id: wb.id,
-        link: wb.link,
+        url: wb.url,
         links_count: count(l.id),
       }
     )
@@ -95,7 +95,7 @@ defmodule Scraper.Core do
   end
 
   def save_page_links(web_page) do
-    with {:ok, [_ | _] = links} <- get_links_from_page(web_page.link) do
+    with {:ok, [_ | _] = links} <- get_links_from_page(web_page.url) do
       save_page_links_bulk(links, web_page.id)
     end
   end

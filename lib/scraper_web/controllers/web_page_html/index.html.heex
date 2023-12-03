@@ -8,7 +8,7 @@
 </.header>
 
 <.table id="web_pages" rows={@web_pages} row_click={&JS.navigate(~p"/web_pages/#{&1.id}")}>
-  <:col :let={web_page} label="Url"><%= web_page.link %></:col>
+  <:col :let={web_page} label="Url"><%= web_page.url %></:col>
   <:col :let={web_page} label="Total links"><%= web_page.links_count %></:col>
   <:action :let={web_page}>
     <.link navigate={~p"/web_pages/#{web_page.id}"}>Show</.link>
