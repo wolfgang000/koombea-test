@@ -1,18 +1,21 @@
-# Scraper
+# Star the project with docker compose 
 
-To start your Phoenix server:
+```
+docker compose up
+```
 
-  * Run `mix setup` to install and setup dependencies
-  * Start Phoenix endpoint with `mix phx.server` or inside IEx with `iex -S mix phx.server`
+# Run the tests
 
-Now you can visit [`localhost:4000`](http://localhost:4000) from your browser.
+```
+docker compose exec backend sh -c "mix test"
+```
 
-Ready to run in production? Please [check our deployment guides](https://hexdocs.pm/phoenix/deployment.html).
+# Running locally 
 
-## Learn more
+Use asdf to install the correct versions of erlang and elixir
 
-  * Official website: https://www.phoenixframework.org/
-  * Guides: https://hexdocs.pm/phoenix/overview.html
-  * Docs: https://hexdocs.pm/phoenix
-  * Forum: https://elixirforum.com/c/phoenix-forum
-  * Source: https://github.com/phoenixframework/phoenix
+# Notes
+
+To parse the page, I used a library called Floki. Sometimes the HTML comes with non-UTF-8 characters. I used a library called Codepagex to eliminate those characters (iconv was a better option, but this one was good enough for this small project). The analysis of the scrapping of the pages is done right there in the request process; thus, it will only respond when we finish the scrapping of the links. This is a very simple and naive approach; a message queue (SQS, RabbitMQ) would be the ideal solution, but that adds a lot of complexity to the project, and we only have a day. Thus, the simple but flawed solution was implemented, and with more development time, this could be improved significantly. 
+
+The project needs more tests, I only added the "happy path" tests but, Due to the time constraint of the assignment, I prioritized only the most essentials tests.
