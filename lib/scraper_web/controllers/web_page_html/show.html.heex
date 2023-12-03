@@ -1,0 +1,15 @@
+<.header>
+  Web page <%= @web_page.id %>
+  <:subtitle>This is a web_page record from your database.</:subtitle>
+  <:actions>
+    <.link href={~p"/web_pages/#{@web_page}/edit"}>
+      <.button>Edit web_page</.button>
+    </.link>
+  </:actions>
+</.header>
+
+<.list>
+  <:item title="Link"><%= @web_page.link %></:item>
+</.list>
+
+<.back navigate={~p"/web_pages"}>Back to web_pages</.back>

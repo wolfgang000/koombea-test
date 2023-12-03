@@ -1,0 +1,23 @@
+<.header>
+  Listing Web pages
+  <:actions>
+    <.link href={~p"/web_pages/new"}>
+      <.button>New Web page</.button>
+    </.link>
+  </:actions>
+</.header>
+
+<.table id="web_pages" rows={@web_pages} row_click={&JS.navigate(~p"/web_pages/#{&1}")}>
+  <:col :let={web_page} label="Link"><%= web_page.link %></:col>
+  <:action :let={web_page}>
+    <div class="sr-only">
+      <.link navigate={~p"/web_pages/#{web_page}"}>Show</.link>
+    </div>
+    <.link navigate={~p"/web_pages/#{web_page}/edit"}>Edit</.link>
+  </:action>
+  <:action :let={web_page}>
+    <.link href={~p"/web_pages/#{web_page}"} method="delete" data-confirm="Are you sure?">
+      Delete
+    </.link>
+  </:action>
+</.table>

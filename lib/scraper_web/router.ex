@@ -21,6 +21,7 @@ defmodule ScraperWeb.Router do
     pipe_through :browser
 
     get "/", PageController, :home
+    resources "/web_pages", WebPageController
   end
 
   # Other scopes may use custom stacks.
